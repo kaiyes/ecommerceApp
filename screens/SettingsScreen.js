@@ -1,24 +1,16 @@
 import React from 'react'
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native'
-
+import { Image, StyleSheet, Text, View } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 import { Button, Header } from 'react-native-elements'
+import BurgerIcon from '../components/BuregerIcon'
+
+import Colors from '../constants/Colors'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    drawerLabel: 'Home',
+    drawerLabel: 'Settings',
     drawerIcon: ({ tintColor }) => (
-      <Image
-        source={require('../assets/images/icon.png')}
-        style={[styles.icon, { tintColor: tintColor }]}
-      />
+      <Ionicons name="md-cog" size={26} color={tintColor} />
     ),
   }
 
@@ -26,19 +18,15 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.RootContainer}>
         <Header
-          leftComponent={{ icon: 'menu', color: '#fff' }}
-          centerComponent={{
-            text: 'Settings',
-            style: { color: '#fff' },
+          containerStyle={{
+            backgroundColor: Colors.grey,
+            borderBottomWidth: 0,
           }}
-        />
-        <Text style={styles.text}>Settings</Text>
-        <Button
-          title="Settings"
-          buttonStyle={styles.button}
-          onPress={() => {
-            this.props.navigation.navigate('Settings')
-          }}
+          rightComponent=<BurgerIcon
+            toggleDrawer={() => {
+              this.props.navigation.toggleDrawer()
+            }}
+          />
         />
       </View>
     )
@@ -48,6 +36,7 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   RootContainer: {
     flex: 1,
+    backgroundColor: Colors.grey,
   },
   text: {
     fontFamily: 'space-mono',
