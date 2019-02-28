@@ -13,6 +13,10 @@ import { Button, Header, Icon } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import BurgerIcon from '../components/BuregerIcon'
 import _ from 'lodash'
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen'
 
 import Colors from '../constants/Colors'
 
@@ -76,6 +80,7 @@ export default class HomeScreen extends React.Component {
 
         <ScrollView
           horizontal
+          directionalLockEnabled
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.scrollView}
         >
@@ -119,21 +124,57 @@ export default class HomeScreen extends React.Component {
         <View style={styles.miscHolder}>
           <Text style={styles.countText}>120 Products</Text>
         </View>
-        <View style={styles.productContainer}>
-          <FlatList
-            data={[1, 2, 3, 5, 6]}
-            renderItem={({ item }) => (
-              <View style={styles.productCard}>
+        <FlatList
+          style={styles.flatlist}
+          data={[
+            1,
+            2,
+            3,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            14,
+            15,
+          ]}
+          ListFooterComponent={() => (
+            <View style={{ height: 150 }} />
+          )}
+          renderItem={({ item }) => (
+            <View style={styles.productCard}>
+              <View style={styles.imageHolder}>
                 <Image
                   source={require('../assets/images/chair.png')}
                   style={styles.productImage}
                 />
               </View>
-            )}
-            numColumns={2}
-            keyExtractor={(item, index) => index}
-          />
-        </View>
+              <View style={styles.textHolder}>
+                <Text style={styles.productNameText}>
+                  Key chair
+                </Text>
+                <Text style={styles.productDescriptionText}>
+                  Key chair is built with soft leather
+                </Text>
+                <Text style={styles.productPriceText}>
+                  $680
+                </Text>
+              </View>
+              <View style={styles.cart}>
+                <Ionicons
+                  name="ios-basket"
+                  size={22}
+                  color={Colors.white}
+                />
+              </View>
+            </View>
+          )}
+          numColumns={2}
+          keyExtractor={(item, index) => index}
+        />
       </View>
     )
   }
@@ -141,24 +182,31 @@ export default class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
   RootContainer: {
+    flex: 1,
     backgroundColor: Colors.grey,
   },
   headerText: {
     fontFamily: 'space-mono',
     fontWeight: 'bold',
     fontSize: 40,
-    marginBottom: 5,
-    marginLeft: 20,
+    marginLeft: wp('5%'),
   },
   scrollView: {
-    height: 130,
-    marginLeft: 20,
-    marginBottom: 20,
+    height: hp('20%'),
+    marginBottom: hp('15%'),
+    marginLeft: wp('5%'),
     alignItems: 'center',
   },
+  countText: {
+    fontFamily: 'space-mono',
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginLeft: wp('5%'),
+    marginBottom: hp('3%'),
+  },
   selectedBox: {
-    height: 115,
-    width: 115,
+    height: hp('14%'),
+    width: wp('28%'),
     marginRight: 10,
     borderRadius: 5,
     justifyContent: 'center',
@@ -174,8 +222,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
   },
   box: {
-    height: 100,
-    width: 100,
+    height: hp('12%'),
+    width: wp('24%'),
     marginRight: 10,
     borderRadius: 5,
     justifyContent: 'center',
@@ -186,36 +234,71 @@ const styles = StyleSheet.create({
     fontFamily: 'space-mono',
     fontWeight: '700',
     fontSize: 12,
-    marginTop: 5,
   },
   categoryIcon: {
-    marginBottom: 5,
+    marginBottom: hp('0.7%'),
   },
   miscHolder: {
     flexDirection: 'row',
   },
-  countText: {
-    fontFamily: 'space-mono',
-    fontWeight: 'bold',
-    fontSize: 16,
-    marginLeft: 20,
-    marginBottom: 20,
-  },
-  productContainer: {
-    marginLeft: 20,
+  flatlist: {
+    marginLeft: wp('5%'),
   },
   productCard: {
     width: 175,
-    height: 200,
     marginRight: 22,
     marginBottom: 20,
-    alignItems: 'center',
     borderRadius: 5,
     backgroundColor: Colors.white,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    elevation: 6,
+  },
+  imageHolder: {
+    alignItems: 'center',
   },
   productImage: {
     width: 90,
     height: 90,
-    marginTop: 30,
+    marginTop: 20,
+  },
+  textHolder: {
+    marginLeft: 25,
+  },
+  productNameText: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginBottom: hp('0.7%'),
+    marginTop: 20,
+  },
+  productDescriptionText: {
+    fontFamily: 'space-mono',
+    color: Colors.lightGrey,
+    fontWeight: 'bold',
+    fontSize: 12,
+    marginBottom: hp('0.7%'),
+  },
+  productPriceText: {
+    fontFamily: 'space-mono',
+    color: Colors.black,
+    fontWeight: 'bold',
+    fontSize: 18,
+    marginBottom: 10,
+  },
+  cart: {
+    position: 'absolute',
+    bottom: -8,
+    right: -8,
+    backgroundColor: Colors.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    width: 40,
+    height: 40,
   },
 })
