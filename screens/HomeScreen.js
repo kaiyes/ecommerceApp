@@ -10,6 +10,7 @@ import {
 import { Button, Header, Icon } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import BurgerIcon from '../components/BuregerIcon'
+import _ from 'lodash'
 
 import Colors from '../constants/Colors'
 
@@ -20,21 +21,25 @@ export default class HomeScreen extends React.Component {
         name: 'Bed room',
         icon: 'ios-bed',
         type: 'ionicon',
+        selected: true,
       },
       {
         name: 'Living Room',
         icon: 'game-controller',
         type: 'entypo',
+        selected: false,
       },
       {
         name: 'Dining Room',
         icon: 'silverware-spoon',
         type: 'material-community',
+        selected: false,
       },
       {
         name: 'Toilet',
         icon: 'toilet',
         type: 'material-community',
+        selected: false,
       },
     ],
   }
@@ -59,8 +64,25 @@ export default class HomeScreen extends React.Component {
           {categoryItems.map((item, index) => {
             return (
               <TouchableOpacity
-                style={styles.categoryBox}
+                style={
+                  item.selected
+                    ? styles.categoryBox1
+                    : styles.categoryBox2
+                }
                 key={index}
+                onPress={() => {
+                  let itemArr = categoryItems
+                  itemArr.map((item, index) => {
+                    item.selected = false
+                  })
+                  let thisItem = _.findIndex(itemArr, {
+                    name: item.name,
+                  })
+                  itemArr[thisItem].selected = true
+                  this.setState({
+                    categoryItems: itemArr,
+                  })
+                }}
               >
                 <Icon
                   name={item.icon}
@@ -91,11 +113,12 @@ const styles = StyleSheet.create({
     fontFamily: 'space-mono',
     fontWeight: 'bold',
     fontSize: 40,
+    marginBottom: 10,
   },
   button: {
     width: 100,
   },
-  categoryBox: {
+  categoryBox1: {
     height: 100,
     width: 100,
     marginRight: 10,
@@ -103,6 +126,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Colors.yellow,
+  },
+  categoryBox2: {
+    height: 100,
+    width: 100,
+    marginRight: 10,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.white,
   },
   categoryText: {
     fontFamily: 'space-mono',
