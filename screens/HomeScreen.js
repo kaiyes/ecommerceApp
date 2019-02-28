@@ -60,14 +60,17 @@ export default class HomeScreen extends React.Component {
           />
         />
         <Text style={styles.headerText}>Explore</Text>
-        <ScrollView horizontal>
+        <ScrollView
+          horizontal
+          contentContainerStyle={styles.scrollView}
+        >
           {categoryItems.map((item, index) => {
             return (
               <TouchableOpacity
                 style={
                   item.selected
-                    ? styles.categoryBox1
-                    : styles.categoryBox2
+                    ? styles.selectedBox
+                    : styles.box
                 }
                 key={index}
                 onPress={() => {
@@ -113,21 +116,35 @@ const styles = StyleSheet.create({
     fontFamily: 'space-mono',
     fontWeight: 'bold',
     fontSize: 40,
-    marginBottom: 10,
+    marginBottom: 5,
   },
   button: {
     width: 100,
   },
-  categoryBox1: {
-    height: 100,
-    width: 100,
+  scrollView: {
+    height: 130,
+    alignItems: 'center',
+  },
+  selectedBox: {
+    height: 115,
+    width: 115,
     marginRight: 10,
+    marginLeft: 10,
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.yellow,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+
+    elevation: 12,
+    backgroundColor: Colors.primary,
   },
-  categoryBox2: {
+  box: {
     height: 100,
     width: 100,
     marginRight: 10,

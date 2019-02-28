@@ -5,5 +5,5 @@ export default {
   white: '#fff',
   black: 'black',
   grey: '#F5F3F5',
-  yellow: '#FFCE7D',
+  primary: '#FFCE7D',
 }
