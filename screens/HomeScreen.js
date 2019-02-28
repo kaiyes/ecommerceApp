@@ -5,8 +5,10 @@ import {
   Text,
   TouchableOpacity,
   View,
+  FlatList,
+  Image,
 } from 'react-native'
-
+import { Font } from 'expo'
 import { Button, Header, Icon } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import BurgerIcon from '../components/BuregerIcon'
@@ -16,6 +18,7 @@ import Colors from '../constants/Colors'
 
 export default class HomeScreen extends React.Component {
   state = {
+    fontLoaded: false,
     categoryItems: [
       {
         name: 'Bed room',
@@ -43,9 +46,17 @@ export default class HomeScreen extends React.Component {
       },
     ],
   }
+  async componentDidMount() {
+    await Font.loadAsync({
+      NoTime: require('../assets/fonts/NoTime.ttf'),
+    })
+    this.setState({
+      fontLoaded: true,
+    })
+  }
 
   render() {
-    let { categoryItems } = this.state
+    let { categoryItems, fontLoaded } = this.state
     return (
       <View style={styles.RootContainer}>
         <Header
@@ -59,9 +70,13 @@ export default class HomeScreen extends React.Component {
             }}
           />
         />
-        <Text style={styles.headerText}>Explore</Text>
+        {fontLoaded ? (
+          <Text style={styles.headerText}>Explore</Text>
+        ) : null}
+
         <ScrollView
           horizontal
+          showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.scrollView}
         >
           {categoryItems.map((item, index) => {
@@ -101,6 +116,24 @@ export default class HomeScreen extends React.Component {
             )
           })}
         </ScrollView>
+        <View style={styles.miscHolder}>
+          <Text style={styles.countText}>120 Products</Text>
+        </View>
+        <View style={styles.productContainer}>
+          <FlatList
+            data={[1, 2, 3, 5, 6]}
+            renderItem={({ item }) => (
+              <View style={styles.productCard}>
+                <Image
+                  source={require('../assets/images/chair.png')}
+                  style={styles.productImage}
+                />
+              </View>
+            )}
+            numColumns={2}
+            keyExtractor={(item, index) => index}
+          />
+        </View>
       </View>
     )
   }
@@ -108,28 +141,25 @@ export default class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
   RootContainer: {
-    flex: 1,
     backgroundColor: Colors.grey,
-    paddingLeft: 10,
   },
   headerText: {
     fontFamily: 'space-mono',
     fontWeight: 'bold',
     fontSize: 40,
     marginBottom: 5,
-  },
-  button: {
-    width: 100,
+    marginLeft: 20,
   },
   scrollView: {
     height: 130,
+    marginLeft: 20,
+    marginBottom: 20,
     alignItems: 'center',
   },
   selectedBox: {
     height: 115,
     width: 115,
     marginRight: 10,
-    marginLeft: 10,
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
@@ -140,7 +170,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.37,
     shadowRadius: 7.49,
-
     elevation: 12,
     backgroundColor: Colors.primary,
   },
@@ -161,5 +190,32 @@ const styles = StyleSheet.create({
   },
   categoryIcon: {
     marginBottom: 5,
+  },
+  miscHolder: {
+    flexDirection: 'row',
+  },
+  countText: {
+    fontFamily: 'space-mono',
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginLeft: 20,
+    marginBottom: 20,
+  },
+  productContainer: {
+    marginLeft: 20,
+  },
+  productCard: {
+    width: 175,
+    height: 200,
+    marginRight: 22,
+    marginBottom: 20,
+    alignItems: 'center',
+    borderRadius: 5,
+    backgroundColor: Colors.white,
+  },
+  productImage: {
+    width: 90,
+    height: 90,
+    marginTop: 30,
   },
 })
