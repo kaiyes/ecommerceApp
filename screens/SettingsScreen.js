@@ -6,7 +6,7 @@ import BurgerIcon from '../components/BuregerIcon'
 
 import Colors from '../constants/Colors'
 
-export default class HomeScreen extends React.Component {
+export default class SettingsScreen extends React.Component {
   static navigationOptions = {
     drawerLabel: 'Settings',
     drawerIcon: ({ tintColor }) => (

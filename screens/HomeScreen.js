@@ -21,6 +21,13 @@ import {
 import Colors from '../constants/Colors'
 
 export default class HomeScreen extends React.Component {
+  static navigationOptions = {
+    drawerLabel: 'Home',
+    drawerIcon: ({ tintColor }) => (
+      <Ionicons name="md-cog" size={26} color={tintColor} />
+    ),
+  }
+
   state = {
     fontLoaded: false,
     categoryItems: [
@@ -145,7 +152,12 @@ export default class HomeScreen extends React.Component {
             <View style={{ height: 150 }} />
           )}
           renderItem={({ item }) => (
-            <View style={styles.productCard}>
+            <TouchableOpacity
+              onPress={() => {
+                this.props.navigation.navigate('Details')
+              }}
+              style={styles.productCard}
+            >
               <View style={styles.imageHolder}>
                 <Image
                   source={require('../assets/images/chair.png')}
@@ -170,7 +182,7 @@ export default class HomeScreen extends React.Component {
                   color={Colors.white}
                 />
               </View>
-            </View>
+            </TouchableOpacity>
           )}
           numColumns={2}
           keyExtractor={(item, index) => index}
