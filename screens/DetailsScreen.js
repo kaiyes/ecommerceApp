@@ -1,5 +1,11 @@
 import React from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  Platform,
+} from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { Button, Header, Icon } from 'react-native-elements'
 import BurgerIcon from '../components/BuregerIcon'
@@ -107,14 +113,22 @@ export default class DetailsScreen extends React.Component {
           />
           {this.pagination}
         </View>
-        <Text style={styles.productNameText}>
-          A Modern Tradition
-        </Text>
-        <Text style={styles.productDescriptionText}>
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        </Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.productNameText}>
+            A Modern Tradition
+          </Text>
+          <Text style={styles.productDescriptionText}>
+            A classic bed frame with a brass twist. The
+            curved headboard and brass-coloured details
+            soften the sturdy steel. Dressed with your
+            favourite linens, it becomes a statement piece
+            and your own personal haven.
+          </Text>
+          <Button
+            title="Add to Bag"
+            buttonStyle={styles.button}
+          />
+        </View>
       </View>
     )
   }
@@ -140,19 +154,25 @@ const styles = StyleSheet.create({
     height: hp('30%'),
     marginLeft: wp('5%'),
   },
+  textContainer: {
+    marginHorizontal: wp('5%'),
+  },
   productNameText: {
     fontFamily: 'space-mono',
-    marginLeft: wp('5%'),
     fontWeight: 'bold',
     fontSize: 22,
-    marginBottom: hp('0.7%'),
-    marginTop: 20,
+    marginBottom: hp('2%'),
+    marginTop: hp('.3%'),
   },
   productDescriptionText: {
-    marginLeft: wp('5%'),
     fontFamily: 'space-mono',
     color: Colors.lightGrey,
     fontSize: 12,
-    width: wp('90%'),
+    textAlign: 'justify',
+  },
+  button: {
+    marginTop: Platform.OS === 'ios' ? hp('7%') : hp('6%'),
+    backgroundColor: Colors.primary,
+    height: hp('7%'),
   },
 })
