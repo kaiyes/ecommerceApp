@@ -12,25 +12,41 @@ import HomeScreen from '../screens/HomeScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 import DetailsScreen from '../screens/DetailsScreen'
 
-const DetailScreen = createStackNavigator({
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: {
-      header: null,
-      drawerLabel: 'Home',
-      drawerIcon: ({ tintColor }) => (
-        <Ionicons
-          name="md-menu"
-          size={26}
-          color={tintColor}
-        />
-      ),
+import Colors from '../constants/Colors'
+
+const DetailScreen = createStackNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: {
+        drawerLabel: 'Home',
+        drawerIcon: ({ tintColor }) => (
+          <Ionicons
+            name="md-menu"
+            size={26}
+            color={tintColor}
+          />
+        ),
+      },
+    },
+    Details: {
+      screen: DetailsScreen,
+      navigationOptions: {
+        headerStyle: {
+          backgroundColor: Colors.grey,
+          borderBottomWidth: 0,
+        },
+        headerTintColor: Colors.black,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      },
     },
   },
-  Details: {
-    screen: DetailsScreen,
-  },
-})
+  {
+    headerMode: 'none',
+  }
+)
 
 const DraweNav = createDrawerNavigator({
   Home: DetailScreen,
