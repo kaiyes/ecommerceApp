@@ -32,6 +32,7 @@ export default class DetailsScreen extends React.Component {
       },
     ],
     activeSlide: 0,
+    numberOfItems: 1,
   }
 
   get pagination() {
@@ -74,6 +75,7 @@ export default class DetailsScreen extends React.Component {
   }
 
   render() {
+    const { numberOfItems } = this.state
     return (
       <View style={styles.RootContainer}>
         <Header
@@ -121,9 +123,41 @@ export default class DetailsScreen extends React.Component {
             A classic bed frame with a brass twist. The
             curved headboard and brass-coloured details
             soften the sturdy steel. Dressed with your
-            favourite linens, it becomes a statement piece
+            favourite linens it becomes a statement piece
             and your own personal haven.
           </Text>
+          <View style={styles.itemCountContainer}>
+            <Text style={styles.countDescription}>
+              add or remove items
+            </Text>
+            <Icon
+              name="minus"
+              type="evilicon"
+              size={22}
+              color={Colors.black}
+              onPress={() => {
+                numberOfItems === 0
+                  ? null
+                  : this.setState({
+                      numberOfItems: numberOfItems - 1,
+                    })
+              }}
+            />
+            <Text style={styles.countText}>
+              {numberOfItems}
+            </Text>
+            <Icon
+              name="plus"
+              type="evilicon"
+              size={22}
+              color={Colors.black}
+              onPress={() => {
+                this.setState({
+                  numberOfItems: numberOfItems + 1,
+                })
+              }}
+            />
+          </View>
           <Button
             title="Add to Bag"
             buttonStyle={styles.button}
@@ -165,14 +199,28 @@ const styles = StyleSheet.create({
     marginTop: hp('.3%'),
   },
   productDescriptionText: {
-    fontFamily: 'space-mono',
-    color: Colors.lightGrey,
     fontSize: 12,
-    textAlign: 'justify',
   },
   button: {
     marginTop: Platform.OS === 'ios' ? hp('7%') : hp('6%'),
     backgroundColor: Colors.primary,
     height: hp('7%'),
+  },
+  itemCountContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: hp('2.5%'),
+  },
+  countText: {
+    fontFamily: 'space-mono',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  countDescription: {
+    fontFamily: 'space-mono',
+    fontWeight: '600',
+    fontSize: 16,
+    color: Colors.lightGrey,
   },
 })
