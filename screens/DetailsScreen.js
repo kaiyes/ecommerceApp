@@ -5,6 +5,7 @@ import {
   Text,
   View,
   Platform,
+  TouchableHighlight,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { Button, Header, Icon } from 'react-native-elements'
@@ -158,10 +159,11 @@ export default class DetailsScreen extends React.Component {
               }}
             />
           </View>
-          <Button
-            title="Add to Bag"
-            buttonStyle={styles.button}
-          />
+          <TouchableHighlight style={styles.button}>
+            <Text style={styles.buttonText}>
+              Add to Cart
+            </Text>
+          </TouchableHighlight>
         </View>
       </View>
     )
@@ -202,15 +204,30 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   button: {
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: Platform.OS === 'ios' ? hp('7%') : hp('6%'),
     backgroundColor: Colors.primary,
     height: hp('7%'),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+    elevation: 12,
+  },
+  buttonText: {
+    fontFamily: 'space-mono',
+    fontWeight: 'bold',
+    fontSize: 22,
   },
   itemCountContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: hp('2.5%'),
+    marginTop: hp('3%'),
   },
   countText: {
     fontFamily: 'space-mono',
