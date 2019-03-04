@@ -6,6 +6,7 @@ import {
   View,
   Platform,
   TouchableOpacity,
+  TouchableHightlight,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { Button, Header, Icon } from 'react-native-elements'
@@ -84,16 +85,18 @@ export default class DetailsScreen extends React.Component {
             backgroundColor: Colors.grey,
             borderBottomWidth: 0,
           }}
-          leftComponent=<Icon
-            name="arrow-back"
-            type="material"
-            size={18}
-            color={Colors.black}
-            style={styles.categoryIcon}
+          leftComponent=<TouchableOpacity
             onPress={() => {
               this.props.navigation.navigate('Home')
             }}
-          />
+          >
+            <Icon
+              name="arrow-back"
+              type="material"
+              size={26}
+              color={Colors.black}
+            />
+          </TouchableOpacity>
           rightComponent=<BurgerIcon
             toggleDrawer={() => {
               this.props.navigation.toggleDrawer()

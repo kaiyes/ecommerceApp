@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
   scrollView: {
     height: hp('20%'),
     marginBottom: hp('15%'),
-    marginLeft: wp('5%'),
+    marginLeft: wp('3.5%'),
     alignItems: 'center',
   },
   countText: {
@@ -230,7 +230,8 @@ const styles = StyleSheet.create({
   selectedBox: {
     height: hp('14%'),
     width: wp('28%'),
-    marginRight: 10,
+    marginLeft: wp('2%'),
+    marginRight: wp('1%'),
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
@@ -247,7 +248,8 @@ const styles = StyleSheet.create({
   box: {
     height: hp('12%'),
     width: wp('24%'),
-    marginRight: 10,
+    marginLeft: wp('2%'),
+    marginRight: wp('1%'),
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
