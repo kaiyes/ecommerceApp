@@ -44,53 +44,61 @@ export default class SignUpScreen extends React.Component {
   render() {
     const { fontLoaded } = this.state
     return (
-      <ScrollView
-        contentContainerStyle={styles.RootContainer}
-      >
-        {fontLoaded ? (
-          <Text style={styles.appName}>E-Commerce App</Text>
-        ) : null}
-        <Logo width={130} height={130} style={styles.svg} />
-        <View style={styles.inputHolder}>
-          <Fumi
-            label={'Email'}
-            iconClass={MaterialsIcon}
-            iconName={'email'}
-            iconColor={'#f95a25'}
-            iconSize={20}
-            iconWidth={40}
-            inputPadding={16}
-          />
-          <Fumi
-            label={'Username'}
-            iconClass={MaterialsIcon}
-            iconName={'face'}
-            iconColor={'#f95a25'}
-            iconSize={20}
-            iconWidth={40}
-            inputPadding={16}
-          />
-          <Fumi
-            label={'Password'}
-            iconClass={MaterialsIcon}
-            iconName={'lock-outline'}
-            secureTextEntry
-            iconColor={'#f95a25'}
-            iconSize={20}
-            iconWidth={40}
-            inputPadding={16}
-          />
-        </View>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            this._login()
-          }}
+      <View style={styles.RootContainer}>
+        <ScrollView
+          contentContainerStyle={styles.RootContainer}
         >
-          <Text style={styles.buttonText}>login</Text>
-        </TouchableOpacity>
-      </ScrollView>
+          {fontLoaded ? (
+            <Text style={styles.appName}>
+              E-Commerce App
+            </Text>
+          ) : null}
+          <Logo
+            width={130}
+            height={130}
+            style={styles.svg}
+          />
+          <View style={styles.inputHolder}>
+            <Fumi
+              label={'Email'}
+              iconClass={MaterialsIcon}
+              iconName={'email'}
+              iconColor={'#f95a25'}
+              iconSize={20}
+              iconWidth={40}
+              inputPadding={16}
+            />
+            <Fumi
+              label={'Username'}
+              iconClass={MaterialsIcon}
+              iconName={'face'}
+              iconColor={'#f95a25'}
+              iconSize={20}
+              iconWidth={40}
+              inputPadding={16}
+            />
+            <Fumi
+              label={'Password'}
+              iconClass={MaterialsIcon}
+              iconName={'lock-outline'}
+              secureTextEntry
+              iconColor={'#f95a25'}
+              iconSize={20}
+              iconWidth={40}
+              inputPadding={16}
+            />
+          </View>
+
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              this._login()
+            }}
+          >
+            <Text style={styles.buttonText}>login</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
     )
   }
 }
