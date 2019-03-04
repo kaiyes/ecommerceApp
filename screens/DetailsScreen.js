@@ -5,7 +5,7 @@ import {
   Text,
   View,
   Platform,
-  TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { Button, Header, Icon } from 'react-native-elements'
@@ -159,11 +159,11 @@ export default class DetailsScreen extends React.Component {
               }}
             />
           </View>
-          <TouchableHighlight style={styles.button}>
+          <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>
               Add to Cart
             </Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
       </View>
     )
@@ -202,11 +202,15 @@ const styles = StyleSheet.create({
   },
   productDescriptionText: {
     fontSize: 12,
+    fontFamily: 'space-mono',
+    fontWeight: '700',
+    textAlign: 'justify',
   },
   button: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: Platform.OS === 'ios' ? hp('7%') : hp('6%'),
+    marginTop:
+      Platform.OS === 'ios' ? hp('5.5%') : hp('6%'),
     backgroundColor: Colors.primary,
     height: hp('7%'),
     shadowColor: '#000',

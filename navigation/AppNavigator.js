@@ -12,7 +12,19 @@ import HomeScreen from '../screens/HomeScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 import DetailsScreen from '../screens/DetailsScreen'
 
+import AuthLoadingScreen from '../screens/AuthLoading'
+import LoginScreen from '../screens/LoginScreen'
+
 import Colors from '../constants/Colors'
+
+const AuthStack = createStackNavigator({
+  Login: {
+    screen: LoginScreen,
+    navigationOptions: {
+      header: null,
+    },
+  },
+})
 
 const DetailScreen = createStackNavigator(
   {
@@ -48,15 +60,20 @@ const DetailScreen = createStackNavigator(
   }
 )
 
-const DraweNav = createDrawerNavigator({
+const DrawerNav = createDrawerNavigator({
   Home: DetailScreen,
-  Settings: {
-    screen: SettingsScreen,
-  },
+  Settings: SettingsScreen,
 })
 
 export default createAppContainer(
-  createSwitchNavigator({
-    Main: DraweNav,
-  })
+  createSwitchNavigator(
+    {
+      AuthLoading: AuthLoadingScreen,
+      App: DrawerNav,
+      Auth: AuthStack,
+    },
+    {
+      initialRouteName: 'AuthLoading',
+    }
+  )
 )

@@ -7,6 +7,7 @@ import {
   View,
   FlatList,
   Image,
+  AsyncStorage,
 } from 'react-native'
 import { Font } from 'expo'
 import { Button, Header, Icon } from 'react-native-elements'
@@ -129,7 +130,17 @@ export default class HomeScreen extends React.Component {
           })}
         </ScrollView>
         <View style={styles.miscHolder}>
-          <Text style={styles.countText}>120 Products</Text>
+          <Text
+            style={styles.countText}
+            onPress={async () => {
+              await AsyncStorage.removeItem(
+                '@userToken:token'
+              )
+              this.props.navigation.navigate('Auth')
+            }}
+          >
+            120 Products
+          </Text>
         </View>
         <FlatList
           style={styles.flatlist}
