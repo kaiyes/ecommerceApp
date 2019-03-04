@@ -5,6 +5,8 @@ import {
   View,
   TouchableOpacity,
   AsyncStorage,
+  ScrollView,
+  KeyboardAvoidingView,
 } from 'react-native'
 import { Font } from 'expo'
 import { Button, Header, Icon } from 'react-native-elements'
@@ -18,7 +20,7 @@ import { Svg } from 'expo'
 import Colors from '../constants/Colors'
 import Logo from '../assets/svg/store.svg'
 
-export default class DetailsScreen extends React.Component {
+export default class SignUpScreen extends React.Component {
   state = {
     fontLoaded: false,
   }
@@ -42,7 +44,9 @@ export default class DetailsScreen extends React.Component {
   render() {
     const { fontLoaded } = this.state
     return (
-      <View style={styles.RootContainer}>
+      <ScrollView
+        contentContainerStyle={styles.RootContainer}
+      >
         {fontLoaded ? (
           <Text style={styles.appName}>E-Commerce App</Text>
         ) : null}
@@ -52,6 +56,15 @@ export default class DetailsScreen extends React.Component {
             label={'Email'}
             iconClass={MaterialsIcon}
             iconName={'email'}
+            iconColor={'#f95a25'}
+            iconSize={20}
+            iconWidth={40}
+            inputPadding={16}
+          />
+          <Fumi
+            label={'Username'}
+            iconClass={MaterialsIcon}
+            iconName={'face'}
             iconColor={'#f95a25'}
             iconSize={20}
             iconWidth={40}
@@ -77,18 +90,7 @@ export default class DetailsScreen extends React.Component {
         >
           <Text style={styles.buttonText}>login</Text>
         </TouchableOpacity>
-        <Text style={styles.signUpText}>
-          not a user ?{' '}
-          <Text
-            style={styles.underlinedText}
-            onPress={() => {
-              this.props.navigation.navigate('SignUp')
-            }}
-          >
-            sign up
-          </Text>
-        </Text>
-      </View>
+      </ScrollView>
     )
   }
 }
@@ -103,7 +105,7 @@ const styles = StyleSheet.create({
     fontFamily: 'FuturaHeader',
     fontWeight: 'bold',
     fontSize: 28,
-    marginTop: hp('14%'),
+    marginTop: hp('5%'),
   },
   button: {
     width: wp('80%'),
@@ -120,18 +122,9 @@ const styles = StyleSheet.create({
   },
   inputHolder: {
     width: wp('80%'),
+    // marginTop: hp('5%'),
   },
   svg: {
     marginVertical: hp('5%'),
-  },
-  signUpText: {
-    fontFamily: 'space-mono',
-    fontSize: 16,
-    marginTop: hp('2%'),
-  },
-  underlinedText: {
-    fontFamily: 'space-mono',
-    fontSize: 16,
-    textDecorationLine: 'underline',
   },
 })

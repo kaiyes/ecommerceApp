@@ -14,6 +14,7 @@ import DetailsScreen from '../screens/DetailsScreen'
 
 import AuthLoadingScreen from '../screens/AuthLoading'
 import LoginScreen from '../screens/LoginScreen'
+import SignUpScreen from '../screens/SignUpScreen'
 
 import Colors from '../constants/Colors'
 
@@ -22,6 +23,16 @@ const AuthStack = createStackNavigator({
     screen: LoginScreen,
     navigationOptions: {
       header: null,
+    },
+  },
+  SignUp: {
+    screen: SignUpScreen,
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: Colors.moderateYellow,
+        borderBottomWidth: 0,
+      },
+      headerTintColor: Colors.black,
     },
   },
 })
